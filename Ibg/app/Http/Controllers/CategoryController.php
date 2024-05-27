@@ -27,19 +27,28 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         // Validate request data
-        $validatedData = $request->validate([
-            'title' => 'required|string',
-            'sub_title' => 'nullable|string',
-            'description' => 'nullable|string',
-            'banner_image' => 'nullable|string',
-            'slug' => 'required|string|unique:categories',
-            'meta_title' => 'nullable|string',
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'sub_title' => 'nullable|string|max:255',
+            'description' => 'required|string',
+            'banner_image' => 'nullable|string|max:255',
+            'slug' => 'required|string|max:255|unique:categories,slug',
+            'meta_title' => 'nullable|string|max:255',
             'meta_description' => 'nullable|string',
-            'parent_id' => 'nullable|exists:categories,id'
+            // 'parent_id' => 'nullable|exists:categories,id',
         ]);
-        // Create new category
-        $validatedData['slug'] = str_replace(' ', '-', $validatedData['slug']);
-        $category = Category::create($validatedData);
+
+        // Create and save the new category
+        $category = new Category();
+        $category->title = $request->input('title');
+        $category->sub_title = $request->input('sub_title');
+        $category->description = $request->input('description');
+        $category->banner_image = $request->input('banner_image');
+        $category->slug = $request->input('slug');
+        $category->meta_title = $request->input('meta_title');
+        $category->meta_description = $request->input('meta_description');
+        // $category->parent_id = $request->input('parent_id');
+        $category->save();
         return redirect()->route('dashboard')->with('success', 'Category created successfully.');
     }
 
@@ -66,13 +75,11 @@ class CategoryController extends Controller
             'sub_title' => 'nullable|string',
             'description' => 'nullable|string',
             'banner_image' => 'nullable|string',
-            // 'slug' => 'required|string|unique:categories,slug,' . $category->id,
             'meta_title' => 'nullable|string',
             'meta_description' => 'nullable|string',
             'parent_id' => 'nullable|exists:categories,id'
         ]);
-        $validatedData['slug'] = str_replace(' ', '-', $validatedData['slug']);
-        // Update the category
+
         $category->update($validatedData);
 
         return redirect()->route('categories.index')->with('success', 'Category updated successfully.');

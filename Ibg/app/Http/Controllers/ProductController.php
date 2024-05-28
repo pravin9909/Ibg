@@ -34,13 +34,12 @@ class ProductController extends Controller
         $genders = Gender::all(); // Fetch all genders
         $brandingOptions = BrandingOption::all(); // Fetch all branding options
         $patterns = Pattern::all(); // Fetch all patterns
-        // dd($categories);
         return view('products.create', compact('categories', 'colors', 'fabricOptions', 'washCares', 'features', 'genders', 'brandingOptions', 'patterns'));
     }
 
     public function store(Request $request)
     {
-        dd($request);
+        // dd($request);
         // Validation rules - adjust as per your needs
         $validatedData = $request->validate([
             'title' => 'required|string|max:255',
@@ -69,7 +68,7 @@ class ProductController extends Controller
         }
         // Create new product
         $product = Product::create($validatedData);
-dd($product);
+
         // Redirect to the product index page with a success message
         return redirect()->route('products.index')->with('success', 'Product created successfully.');
     }

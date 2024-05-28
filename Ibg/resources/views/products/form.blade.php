@@ -1,5 +1,5 @@
-<form action="{{ route('products.store') }}" method="POST" enctype="multipart/form-data">
-    @csrf
+{{-- <form action="{{ route('products.store') }}" method="POST" enctype="multipart/form-data"> --}}
+    {{-- @csrf --}}
 
     <div class="form-group">
         <label for="category_id">Category</label>
@@ -135,6 +135,7 @@
             @endforeach
         </select>
     </div>
+
     <script>
     ClassicEditor
     .create(document.querySelector('.ckeditor-classic'))
@@ -142,9 +143,4 @@
     console.error(error);
     });
     </script>
-</form>
-</div>
-</div>
-</div>
-</div>
-</div>
+

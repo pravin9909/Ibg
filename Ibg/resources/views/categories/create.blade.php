@@ -842,10 +842,10 @@
                             <div class="collapse menu-dropdown" id="sidebarApps">
                                 <ul class="nav nav-sm flex-column">
                                     <li class="nav-item">
-                                        <a href="apps-calendar.html" class="nav-link" data-key="t-calendar"> Add New Product </a>
+                                        <a href="{{ route('products.create') }}"class="nav-link" data-key="t-calendar"> Add New Product </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="apps-chat.html" class="nav-link" data-key="t-chat">View Listing of Category </a>
+                                        <a href="{{ route('products.index') }}" class="nav-link" data-key="t-chat">View Listing of Category </a>
                                     </li>
                                     {{-- <li class="nav-item">
                                         <a href="#sidebarEmail" class="nav-link" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarEmail" data-key="t-email">

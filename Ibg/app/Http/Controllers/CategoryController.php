@@ -36,7 +36,7 @@ class CategoryController extends Controller
 
         // Process banner image upload
         if ($request->hasFile('banner_image')) {
-            $imagePath = $request->file('banner_image')->store('uploads/categories', 'public');
+            $imagePath = $request->file('banner_image')->store('public/categories', 'public');
             $validatedData['banner_image'] = $imagePath;
         }
 
@@ -81,7 +81,7 @@ class CategoryController extends Controller
         }
 
         // Upload new image
-        $imagePath = $request->file('banner_image')->store('uploads/categories', 'public');
+        $imagePath = $request->file('banner_image')->store('public/categories', 'public');
         $validatedData['banner_image'] = $imagePath;
     }
 

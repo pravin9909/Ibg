@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Category;
+use Illuminate\Support\Facades\Storage;
 
 class CategoryController extends Controller
 {
@@ -17,50 +18,41 @@ class CategoryController extends Controller
 
     public function create()
     {
-        // Retrieve all categories to show as parent options
-        $categories = Category::all();
-
-        // Return view for creating a new category
-        return view('categories.create', compact('categories'));
+        return view('categories.create');
     }
 
     public function store(Request $request)
     {
         // Validate request data
-        $request->validate([
+        $validatedData = $request->validate([
             'title' => 'required|string|max:255',
             'sub_title' => 'nullable|string|max:255',
             'description' => 'required|string',
-            'banner_image' => 'nullable|string|max:255',
+            'banner_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'slug' => 'required|string|max:255|unique:categories,slug',
             'meta_title' => 'nullable|string|max:255',
             'meta_description' => 'nullable|string',
-            // 'parent_id' => 'nullable|exists:categories,id',
         ]);
 
+        // Process banner image upload
+        if ($request->hasFile('banner_image')) {
+            $imagePath = $request->file('banner_image')->store('uploads/categories', 'public');
+            $validatedData['banner_image'] = $imagePath;
+        }
+
         // Create and save the new category
-        $category = new Category();
-        $category->title = $request->input('title');
-        $category->sub_title = $request->input('sub_title');
-        $category->description = $request->input('description');
-        $category->banner_image = $request->input('banner_image');
-        $category->slug = $request->input('slug');
-        $category->meta_title = $request->input('meta_title');
-        $category->meta_description = $request->input('meta_description');
-        // $category->parent_id = $request->input('parent_id');
-        $category->save();
-        return redirect()->route('dashboard')->with('success', 'Category created successfully.');
+        Category::create($validatedData);
+
+        return redirect()->route('categories.index')->with('success', 'Category created successfully.');
     }
 
     public function show(Category $category)
     {
-        // Show a specific category
         return view('categories.show', compact('category'));
     }
 
     public function edit(Category $category)
     {
-        // Retrieve all categories to show as parent options
         $categories = Category::all();
 
         // Return view for editing a category
@@ -68,26 +60,47 @@ class CategoryController extends Controller
     }
 
     public function update(Request $request, Category $category)
-    {
-        // Validate request data
-        $validatedData = $request->validate([
-            'title' => 'required|string',
-            'sub_title' => 'nullable|string',
-            'description' => 'nullable|string',
-            'banner_image' => 'nullable|string',
-            'meta_title' => 'nullable|string',
-            'meta_description' => 'nullable|string',
-            'parent_id' => 'nullable|exists:categories,id'
-        ]);
+{
 
-        $category->update($validatedData);
+    // Validate request data
+    $validatedData = $request->validate([
+        'title' => 'required|string|max:255',
+        'sub_title' => 'nullable|string|max:255',
+        'description' => 'nullable|string',
+        'banner_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        // 'slug' => 'required|string|max:255|unique:categories,slug,' . $category->id,
+        'meta_title' => 'nullable|string|max:255',
+        'meta_description' => 'nullable|string',
+    ]);
 
-        return redirect()->route('categories.index')->with('success', 'Category updated successfully.');
+    // Handle banner image update
+    if ($request->hasFile('banner_image')) {
+        // Delete old image if exists
+        if ($category->banner_image && Storage::disk('public')->exists($category->banner_image)) {
+            Storage::disk('public')->delete($category->banner_image);
+        }
+
+        // Upload new image
+        $imagePath = $request->file('banner_image')->store('uploads/categories', 'public');
+        $validatedData['banner_image'] = $imagePath;
     }
+
+    // Update category
+
+    $category->update($validatedData);
+
+    return redirect()->route('categories.index')->with('success', 'Category updated successfully.');
+}
+
 
     public function destroy(Category $category)
     {
-        // Delete the category
+        // Delete banner image if exists
+        if ($category->banner_image && Storage::disk('public')->exists($category->banner_image)) {
+            Storage::disk('public')->delete($category->banner_image);
+        }
+
+        // Delete category
         $category->delete();
 
         return redirect()->route('categories.index')->with('success', 'Category deleted successfully.');

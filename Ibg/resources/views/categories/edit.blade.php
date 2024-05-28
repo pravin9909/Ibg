@@ -1847,48 +1847,54 @@
         <div class="main-content">
 
             <div class="card">
-                <div class="card-header">Edit Category - {{ $category->title }}</div>
+                {{-- <div class="card-header"> {{ $category->title }}</div> --}}
             
                 <div class="card-body">
-                    <form action="{{ route('categories.update', $category->id) }}" method="POST">
+                    <form action="{{ route('categories.update', $category->id) }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
-            
+                
                         <div class="form-group">
                             <label for="title">Title</label>
                             <input type="text" name="title" id="title" class="form-control" value="{{ old('title', $category->title) }}" required>
                         </div>
-            
+                
                         <div class="form-group">
                             <label for="sub_title">Sub Title</label>
                             <input type="text" name="sub_title" id="sub_title" class="form-control" value="{{ old('sub_title', $category->sub_title) }}">
                         </div>
-            
+                
                         <div class="form-group">
                             <label for="description">Description</label>
-                            <textarea name="description" id="description" class="ckeditor-classic" rows="5">{{ old('description', $category->description) }}</textarea>
+                            <textarea name="description" id="description" class="ckeditor-classic form-control" rows="5">{{ old('description', $category->description) }}</textarea>
                         </div>
-            
+                
                         <div class="form-group">
                             <label for="banner_image">Banner Image</label>
-                            <input type="text" name="banner_image" id="banner_image" class="form-control" value="{{ old('banner_image', $category->banner_image) }}">
+                            <input type="file" name="banner_image" id="banner_image" class="form-control-file">
+                            @if ($category->banner_image)
+                                <div class="mt-2">
+                                    <img src="{{ asset('storage/' . $category->banner_image) }}" alt="Banner Image" class="img-fluid" style="max-width: 300px;">
+                                    <div class="form-check mt-2">
+                                        <input class="form-check-input" type="checkbox" name="remove_image" id="remove_image">
+                                        <label class="form-check-label" for="remove_image">
+                                            Remove Banner Image
+                                        </label>
+                                    </div>
+                                </div>
+                            @endif
                         </div>
-            
-                        {{-- <div class="form-group">
-                            <label for="slug">Slug</label>
-                            <input type="text" name="slug" id="slug" class="form-control" value="{{ old('slug', $category->slug) }}" required>
-                        </div> --}}
-            
+                
                         <div class="form-group">
                             <label for="meta_title">Meta Title</label>
                             <input type="text" name="meta_title" id="meta_title" class="form-control" value="{{ old('meta_title', $category->meta_title) }}">
                         </div>
-            
+                
                         <div class="form-group">
                             <label for="meta_description">Meta Description</label>
                             <textarea name="meta_description" id="meta_description" class="form-control" rows="3">{{ old('meta_description', $category->meta_description) }}</textarea>
                         </div>
-            
+                
                         <div class="form-group">
                             <label for="parent_id">Parent Category</label>
                             <select name="parent_id" id="parent_id" class="form-control">
@@ -1898,11 +1904,13 @@
                                 @endforeach
                             </select>
                         </div>
-            
+                
                         <button type="submit" class="btn btn-primary">Update Category</button>
                         <a href="{{ route('categories.index') }}" class="btn btn-secondary">Cancel</a>
                     </form>
                 </div>
+                
+                
             </div>
             
             
@@ -1919,21 +1927,21 @@
             
             <!-- End Page-content -->
 
-            <footer class="footer">
+            {{-- <footer class="footer">
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-sm-6">
                             <script>document.write(new Date().getFullYear())</script> © IBG.
-                        </div>
+                        </div> --}}
                         {{-- <div class="col-sm-6">
                             <div class="text-sm-end d-none d-sm-block">
                                 Design & Develop by Themesbrand
                             </div>
                         </div> --}}
-                    </div>
+                    {{-- </div>
                 </div>
             </footer>
-        </div>
+        </div> --}}
         <!-- end main content-->
 
     </div>

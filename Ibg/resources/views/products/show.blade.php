@@ -842,10 +842,10 @@
                                 <div class="collapse menu-dropdown" id="sidebarApps">
                                     <ul class="nav nav-sm flex-column">
                                         <li class="nav-item">
-                                            <a href="apps-calendar.html" class="nav-link" data-key="t-calendar"> Add New Product </a>
+                                            <a href="{{ route('products.create') }}" class="nav-link" data-key="t-calendar"> Add New Product </a>
                                         </li>
                                         <li class="nav-item">
-                                            <a href="apps-chat.html" class="nav-link" data-key="t-chat">View Listing of Category </a>
+                                            <a href="{{ route('products.index') }}" class="nav-link" data-key="t-chat">View Listing of Category </a>
                                         </li>
                                         {{-- <li class="nav-item">
                                             <a href="#sidebarEmail" class="nav-link" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarEmail" data-key="t-email">
@@ -1848,114 +1848,191 @@
 
                 <div class="page-content">
                     <div class="card-body">
-                        <div class="table-responsive">
-                            <table id="example" class="table table-bordered dt-responsive nowrap table-striped align-middle" style="width:100%">
-                                <thead>
-                                    <tr>
-                                        <th scope="col" style="width: 10px;">
-                                            <div class="form-check">
-                                                {{-- <input class="form-check-input fs-15" type="checkbox" id="checkAll" value="option"> --}}
-                                            </div>
-                                        </th>
-                                        <th data-ordering="false">Field</th>
-                                        <th data-ordering="false">Value</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>
-                                            <div class="form-check">
-                                                <input class="form-check-input fs-15" type="checkbox" name="checkAll" value="option{{ $category->id }}">
-                                            </div>
-                                        </td>
-                                        <td>Title:</td>
-                                        <td>{{ $category->title }}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="form-check">
-                                                <input class="form-check-input fs-15" type="checkbox" name="checkAll" value="option{{ $category->id }}">
-                                            </div>
-                                        </td>
-                                        <td>Sub Title:</td>
-                                        <td>{{ $category->sub_title }}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="form-check">
-                                                <input class="form-check-input fs-15" type="checkbox" name="checkAll" value="option{{ $category->id }}">
-                                            </div>
-                                        </td>
-                                        <td>Description:</td>
-                                        <td>{!! $category->description !!}</td>
-                                    </tr>
-                                    @if ($category->banner_image)
-                                    <tr>
-                                        <td>
-                                            <div class="form-check">
-                                                <input class="form-check-input fs-15" type="checkbox" name="checkAll" value="option{{ $category->id }}">
-                                            </div>
-                                        </td>
-                                        <td>Banner Image:</td>
-                                        <td>
-                                            @if ($category->banner_image)
-                                                <img src="{{ asset('storage/' . $category->banner_image) }}" alt="Banner Image" class="img-fluid">
-                                            @else
-                                                <span>No Image</span>
-                                            @endif
-                                        </td>
-                                    </tr>
-                                    @endif
-                                    <tr>
-                                        <td>
-                                            <div class="form-check">
-                                                <input class="form-check-input fs-15" type="checkbox" name="checkAll" value="option{{ $category->id }}">
-                                            </div>
-                                        </td>
-                                        <td>Slug:</td>
-                                        <td>{{ $category->slug }}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="form-check">
-                                                <input class="form-check-input fs-15" type="checkbox" name="checkAll" value="option{{ $category->id }}">
-                                            </div>
-                                        </td>
-                                        <td>Meta Title:</td>
-                                        <td>{{ $category->meta_title }}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="form-check">
-                                                <input class="form-check-input fs-15" type="checkbox" name="checkAll" value="option{{ $category->id }}">
-                                            </div>
-                                        </td>
-                                        <td>Meta Description:</td>
-                                        <td>{{ $category->meta_description }}</td>
-                                    </tr>
-                                    @if ($category->parent)
-                                    <tr>
-                                        <td>
-                                            <div class="form-check">
-                                                <input class="form-check-input fs-15" type="checkbox" name="checkAll" value="option{{ $category->id }}">
-                                            </div>
-                                        </td>
-                                        <td>Parent Category:</td>
-                                        <td>{{ $category->parent->title }}</td>
-                                    </tr>
-                                    @endif
-                                </tbody>
-                            </table>
-                        </div>
+                        <table id="example" class="table table-bordered dt-responsive nowrap table-striped align-middle" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th scope="col" style="width: 10px;">
+                                        <div class="form-check">
+                                            {{-- <input class="form-check-input fs-15" type="checkbox" id="checkAll" value="option"> --}}
+                                        </div>
+                                    </th>
+                                    <th data-ordering="false">Field</th>
+                                    <th data-ordering="false">Value</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">
+                                        <div class="form-check">
+                                            <input class="form-check-input fs-15" type="checkbox" name="checkAll" value="option{{ $product->id }}">
+                                        </div>
+                                    </th>
+                                    <td>Title:</td>
+                                    <td>{{ $product->title }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">
+                                        <div class="form-check">
+                                            <input class="form-check-input fs-15" type="checkbox" name="checkAll" value="option{{ $product->id }}">
+                                        </div>
+                                    </th>
+                                    <td>SKU:</td>
+                                    <td>{{ $product->sku }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">
+                                        <div class="form-check">
+                                            <input class="form-check-input fs-15" type="checkbox" name="checkAll" value="option{{ $product->id }}">
+                                        </div>
+                                    </th>
+                                    <td>Status:</td>
+                                    <td>{{ $product->status }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">
+                                        <div class="form-check">
+                                            <input class="form-check-input fs-15" type="checkbox" name="checkAll" value="option{{ $product->id }}">
+                                        </div>
+                                    </th>
+                                    <td>Description:</td>
+                                    <td>{{ $product->description }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">
+                                        <div class="form-check">
+                                            <input class="form-check-input fs-15" type="checkbox" name="checkAll" value="option{{ $product->id }}">
+                                        </div>
+                                    </th>
+                                    <td>Specification:</td>
+                                    <td>{{ $product->specification }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">
+                                        <div class="form-check">
+                                            <input class="form-check-input fs-15" type="checkbox" name="checkAll" value="option{{ $product->id }}">
+                                        </div>
+                                    </th>
+                                    <td>Video Link:</td>
+                                    <td>{{ $product->video_link }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">
+                                        <div class="form-check">
+                                            <input class="form-check-input fs-15" type="checkbox" name="checkAll" value="option{{ $product->id }}">
+                                        </div>
+                                    </th>
+                                    <td>Slug:</td>
+                                    <td>{{ $product->slug }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">
+                                        <div class="form-check">
+                                            <input class="form-check-input fs-15" type="checkbox" name="checkAll" value="option{{ $product->id }}">
+                                        </div>
+                                    </th>
+                                    <td>Meta Title:</td>
+                                    <td>{{ $product->meta_title }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">
+                                        <div class="form-check">
+                                            <input class="form-check-input fs-15" type="checkbox" name="checkAll" value="option{{ $product->id }}">
+                                        </div>
+                                    </th>
+                                    <td>Meta Description:</td>
+                                    <td>{{ $product->meta_description }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">
+                                        <div class="form-check">
+                                            <input class="form-check-input fs-15" type="checkbox" name="checkAll" value="option{{ $product->id }}">
+                                        </div>
+                                    </th>
+                                    <td>Size Guide:</td>
+                                    <td>{{ $product->size_guide }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">
+                                        <div class="form-check">
+                                            <input class="form-check-input fs-15" type="checkbox" name="checkAll" value="option{{ $product->id }}">
+                                        </div>
+                                    </th>
+                                    <td>Main Image:</td>
+                                    <td>{{ $product->main_image }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">
+                                        <div class="form-check">
+                                            <input class="form-check-input fs-15" type="checkbox" name="checkAll" value="option{{ $product->id }}">
+                                        </div>
+                                    </th>
+                                    <td>Color:</td>
+                                    <td>{{ optional($product->color)->name }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">
+                                        <div class="form-check">
+                                            <input class="form-check-input fs-15" type="checkbox" name="checkAll" value="option{{ $product->id }}">
+                                        </div>
+                                    </th>
+                                    <td>Fabric Option:</td>
+                                    <td>{{ optional($product->fabricOption)->name }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">
+                                        <div class="form-check">
+                                            <input class="form-check-input fs-15" type="checkbox" name="checkAll" value="option{{ $product->id }}">
+                                        </div>
+                                    </th>
+                                    <td>Wash Care:</td>
+                                    <td>{{ optional($product->washCare)->name }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">
+                                        <div class="form-check">
+                                            <input class="form-check-input fs-15" type="checkbox" name="checkAll" value="option{{ $product->id }}">
+                                        </div>
+                                    </th>
+                                    <td>Feature:</td>
+                                    <td>{{ optional($product->feature)->name }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">
+                                        <div class="form-check">
+                                            <input class="form-check-input fs-15" type="checkbox" name="checkAll" value="option{{ $product->id }}">
+                                        </div>
+                                    </th>
+                                    <td>Gender:</td>
+                                    <td>{{ optional($product->gender)->name }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">
+                                        <div class="form-check">
+                                            <input class="form-check-input fs-15" type="checkbox" name="checkAll" value="option{{ $product->id }}">
+                                        </div>
+                                    </th>
+                                    <td>Branding Option:</td>
+                                    <td>{{ optional($product->brandingOption)->name }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">
+                                        <div class="form-check">
+                                            <input class="form-check-input fs-15" type="checkbox" name="checkAll" value="option{{ $product->id }}">
+                                        </div>
+                                    </th>
+                                    <td>Pattern:</td>
+                                    <td>{{ optional($product->pattern)->name }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     
                         <div class="card-footer">
-                            <a href="{{ route('categories.edit', $category->id) }}" class="btn btn-primary btn-sm">Edit</a>
-                            <form action="{{ route('categories.destroy', $category->id) }}" method="POST" style="display: inline;">
+                            <a href="{{ route('products.edit', $product->id) }}" class="btn btn-warning">Edit</a>
+                            <form action="{{ route('products.destroy', $product->id) }}" method="POST" style="display:inline-block;">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this category?')">Delete</button>
+                                <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this product?')">Delete</button>
                             </form>
-                            <a href="{{ route('categories.index') }}" class="btn btn-secondary btn-sm float-right">Back</a>
                         </div>
                     </div>
                     

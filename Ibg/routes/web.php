@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 
 /*
@@ -38,3 +39,12 @@ Route::get('/categories/{category}', [CategoryController::class, 'show'])->middl
 Route::get('/categories/{category}/edit', [CategoryController::class, 'edit'])->middleware('custom.auth')->name('categories.edit');
 Route::put('/categories/{category}', [CategoryController::class, 'update'])->middleware('custom.auth')->name('categories.update');
 Route::delete('/categories/{category}', [CategoryController::class, 'destroy'])->middleware('custom.auth')->name('categories.destroy');
+
+ 
+Route::get('/products', [ProductController::class, 'index'])->middleware('custom.auth')->name('products.index');
+Route::get('/products/create', [ProductController::class, 'create'])->middleware('custom.auth')->name('products.create');
+Route::post('/products', [ProductController::class, 'store'])->middleware('custom.auth')->name('products.store');
+Route::get('/products/{product}', [ProductController::class, 'show'])->middleware('custom.auth')->name('products.show');
+Route::get('/products/{product}/edit', [ProductController::class, 'edit'])->middleware('custom.auth')->name('products.edit');
+Route::put('/products/{product}', [ProductController::class, 'update'])->middleware('custom.auth')->name('products.update');
+Route::delete('/products/{product}', [ProductController::class, 'destroy'])->middleware('custom.auth')->name('products.destroy');

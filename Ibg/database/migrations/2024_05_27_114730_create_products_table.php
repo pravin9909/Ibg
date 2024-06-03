@@ -26,6 +26,7 @@ class CreateProductsTable extends Migration
             $table->text('meta_description')->nullable();
             $table->string('size_guide')->nullable();
             $table->string('main_image')->nullable();
+            $table->unsignedBigInteger('category_id')->nullable();
             $table->unsignedBigInteger('color_id')->nullable();
             $table->unsignedBigInteger('fabric_option_id')->nullable();
             $table->unsignedBigInteger('wash_care_id')->nullable();
@@ -36,6 +37,7 @@ class CreateProductsTable extends Migration
             $table->timestamps();
 
             // Foreign key constraints
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
             $table->foreign('color_id')->references('id')->on('colors')->onDelete('cascade');
             $table->foreign('fabric_option_id')->references('id')->on('fabric_options')->onDelete('cascade');
             $table->foreign('wash_care_id')->references('id')->on('wash_cares')->onDelete('cascade');

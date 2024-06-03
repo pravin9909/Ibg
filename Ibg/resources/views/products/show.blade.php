@@ -1847,194 +1847,59 @@
             <div class="main-content">
 
                 <div class="page-content">
-                    <div class="card-body">
-                        <table id="example" class="table table-bordered dt-responsive nowrap table-striped align-middle" style="width:100%">
-                            <thead>
-                                <tr>
-                                    <th scope="col" style="width: 10px;">
-                                        <div class="form-check">
-                                            {{-- <input class="form-check-input fs-15" type="checkbox" id="checkAll" value="option"> --}}
-                                        </div>
-                                    </th>
-                                    <th data-ordering="false">Field</th>
-                                    <th data-ordering="false">Value</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <th scope="row">
-                                        <div class="form-check">
-                                            <input class="form-check-input fs-15" type="checkbox" name="checkAll" value="option{{ $product->id }}">
-                                        </div>
-                                    </th>
-                                    <td>Title:</td>
-                                    <td>{{ $product->title }}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">
-                                        <div class="form-check">
-                                            <input class="form-check-input fs-15" type="checkbox" name="checkAll" value="option{{ $product->id }}">
-                                        </div>
-                                    </th>
-                                    <td>SKU:</td>
-                                    <td>{{ $product->sku }}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">
-                                        <div class="form-check">
-                                            <input class="form-check-input fs-15" type="checkbox" name="checkAll" value="option{{ $product->id }}">
-                                        </div>
-                                    </th>
-                                    <td>Status:</td>
-                                    <td>{{ $product->status }}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">
-                                        <div class="form-check">
-                                            <input class="form-check-input fs-15" type="checkbox" name="checkAll" value="option{{ $product->id }}">
-                                        </div>
-                                    </th>
-                                    <td>Description:</td>
-                                    <td>{{ $product->description }}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">
-                                        <div class="form-check">
-                                            <input class="form-check-input fs-15" type="checkbox" name="checkAll" value="option{{ $product->id }}">
-                                        </div>
-                                    </th>
-                                    <td>Specification:</td>
-                                    <td>{{ $product->specification }}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">
-                                        <div class="form-check">
-                                            <input class="form-check-input fs-15" type="checkbox" name="checkAll" value="option{{ $product->id }}">
-                                        </div>
-                                    </th>
-                                    <td>Video Link:</td>
-                                    <td>{{ $product->video_link }}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">
-                                        <div class="form-check">
-                                            <input class="form-check-input fs-15" type="checkbox" name="checkAll" value="option{{ $product->id }}">
-                                        </div>
-                                    </th>
-                                    <td>Slug:</td>
-                                    <td>{{ $product->slug }}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">
-                                        <div class="form-check">
-                                            <input class="form-check-input fs-15" type="checkbox" name="checkAll" value="option{{ $product->id }}">
-                                        </div>
-                                    </th>
-                                    <td>Meta Title:</td>
-                                    <td>{{ $product->meta_title }}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">
-                                        <div class="form-check">
-                                            <input class="form-check-input fs-15" type="checkbox" name="checkAll" value="option{{ $product->id }}">
-                                        </div>
-                                    </th>
-                                    <td>Meta Description:</td>
-                                    <td>{{ $product->meta_description }}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">
-                                        <div class="form-check">
-                                            <input class="form-check-input fs-15" type="checkbox" name="checkAll" value="option{{ $product->id }}">
-                                        </div>
-                                    </th>
-                                    <td>Size Guide:</td>
-                                    <td>{{ $product->size_guide }}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">
-                                        <div class="form-check">
-                                            <input class="form-check-input fs-15" type="checkbox" name="checkAll" value="option{{ $product->id }}">
-                                        </div>
-                                    </th>
-                                    <td>Main Image:</td>
-                                    <td>{{ $product->main_image }}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">
-                                        <div class="form-check">
-                                            <input class="form-check-input fs-15" type="checkbox" name="checkAll" value="option{{ $product->id }}">
-                                        </div>
-                                    </th>
-                                    <td>Color:</td>
-                                    <td>{{ optional($product->color)->name }}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">
-                                        <div class="form-check">
-                                            <input class="form-check-input fs-15" type="checkbox" name="checkAll" value="option{{ $product->id }}">
-                                        </div>
-                                    </th>
-                                    <td>Fabric Option:</td>
-                                    <td>{{ optional($product->fabricOption)->name }}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">
-                                        <div class="form-check">
-                                            <input class="form-check-input fs-15" type="checkbox" name="checkAll" value="option{{ $product->id }}">
-                                        </div>
-                                    </th>
-                                    <td>Wash Care:</td>
-                                    <td>{{ optional($product->washCare)->name }}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">
-                                        <div class="form-check">
-                                            <input class="form-check-input fs-15" type="checkbox" name="checkAll" value="option{{ $product->id }}">
-                                        </div>
-                                    </th>
-                                    <td>Feature:</td>
-                                    <td>{{ optional($product->feature)->name }}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">
-                                        <div class="form-check">
-                                            <input class="form-check-input fs-15" type="checkbox" name="checkAll" value="option{{ $product->id }}">
-                                        </div>
-                                    </th>
-                                    <td>Gender:</td>
-                                    <td>{{ optional($product->gender)->name }}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">
-                                        <div class="form-check">
-                                            <input class="form-check-input fs-15" type="checkbox" name="checkAll" value="option{{ $product->id }}">
-                                        </div>
-                                    </th>
-                                    <td>Branding Option:</td>
-                                    <td>{{ optional($product->brandingOption)->name }}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">
-                                        <div class="form-check">
-                                            <input class="form-check-input fs-15" type="checkbox" name="checkAll" value="option{{ $product->id }}">
-                                        </div>
-                                    </th>
-                                    <td>Pattern:</td>
-                                    <td>{{ optional($product->pattern)->name }}</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h1>{{ $product->title }}</h1>
                     
-                        <div class="card-footer">
-                            <a href="{{ route('products.edit', $product->id) }}" class="btn btn-warning">Edit</a>
-                            <form action="{{ route('products.destroy', $product->id) }}" method="POST" style="display:inline-block;">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this product?')">Delete</button>
-                            </form>
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Product Details</h5>
+                    
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <p><strong>Title:</strong> {{ $product->title }}</p>
+                                                <p><strong>Subtitle:</strong> {{ $product->subtitle }}</p>
+                                                <p><strong>SKU:</strong> {{ $product->sku }}</p>
+                                                <p><strong>Description:</strong> {{ $product->description }}</p>
+                                                <p><strong>Specification:</strong> {{ $product->specification }}</p>
+                                                <p><strong>Video Link:</strong> <a href="{{ $product->video_link }}">{{ $product->video_link }}</a></p>
+                                                <p><strong>Slug:</strong> {{ $product->slug }}</p>
+                                                <p><strong>Meta Title:</strong> {{ $product->meta_title }}</p>
+                                                <p><strong>Meta Description:</strong> {{ $product->meta_description }}</p>
+                                                <p><strong>Size Guide:</strong> {{ $product->size_guide }}</p>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p><strong>Category:</strong> {{ $product->category ? $product->category->title : 'N/A' }}</p>
+                                                <p><strong>Color:</strong> {{ $product->color ? $product->color->name : 'N/A' }}</p>
+                                                <p><strong>Fabric Option:</strong> {{ $product->fabricOption ? $product->fabricOption->name : 'N/A' }}</p>
+                                                <p><strong>Wash Care:</strong> {{ $product->washCare ? $product->washCare->name : 'N/A' }}</p>
+                                                <p><strong>Feature:</strong> {{ $product->feature ? $product->feature->name : 'N/A' }}</p>
+                                                <p><strong>Gender:</strong> {{ $product->gender ? $product->gender->name : 'N/A' }}</p>
+                                                <p><strong>Branding Option:</strong> {{ $product->brandingOption ? $product->brandingOption->name : 'N/A' }}</p>
+                                                <p><strong>Pattern:</strong> {{ $product->pattern ? $product->pattern->name : 'N/A' }}</p>
+                                                <p><strong>Main Image:</strong></p>
+                                                @if($product->main_image)
+                                                    <img src="{{ asset('storage/' . $product->main_image) }}" alt="{{ $product->title }}" class="img-fluid">
+                                                @else
+                                                    <p>No image available</p>
+                                                @endif
+                                            </div>
+                                        </div>
+                    
+                                        <a href="{{ route('products.index') }}" class="btn btn-secondary mt-3">Back to Products</a>
+                                        <a href="{{ route('products.edit', $product->id) }}" class="btn btn-primary mt-3">Edit Product</a>
+                                        <form action="{{ route('products.destroy', $product->id) }}" method="POST" class="d-inline">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger mt-3" onclick="return confirm('Are you sure you want to delete this product?')">Delete Product</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
+                    
                     
                     
                 </div>

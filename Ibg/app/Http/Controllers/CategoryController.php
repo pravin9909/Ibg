@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Category;
+use App\Models\Product;
 use Illuminate\Support\Facades\Storage;
 
 class CategoryController extends Controller
@@ -33,7 +34,7 @@ class CategoryController extends Controller
             'meta_title' => 'nullable|string|max:255',
             'meta_description' => 'nullable|string',
         ]);
-
+// dd($validatedData);
         // Process banner image upload
         if ($request->hasFile('banner_image')) {
             $imagePath = $request->file('banner_image')->store('public/categories', 'public');
@@ -104,5 +105,23 @@ class CategoryController extends Controller
         $category->delete();
 
         return redirect()->route('categories.index')->with('success', 'Category deleted successfully.');
+    }
+
+    public function showCategories()
+    {
+        $categories = Category::all(); // Fetch all categories
+
+        foreach ($categories as $category) {
+            $category->products = Product::where('category_id', $category->id)->get(); // Fetch products for each category
+        }
+
+        return view('welcome', compact('categories'));
+    }
+    public function getProductsByCategory($id)
+    {
+        $category = Category::findOrFail($id);
+        $products = $category->products; // Assuming you have a relationship set up between Category and Product
+
+        return view('products.listing', compact('products', 'category'));
     }
 }

@@ -12,7 +12,7 @@ class Product extends Model
     protected $fillable = [
         'title', 'subtitle', 'sku', 'description', 'specification',
         'video_link', 'created_by', 'created_date', 'updated_by', 'updated_at',
-        'status', 'size', 'slug', 'meta_title', 'meta_description',
+        'status', 'size', 'slug', 'meta_title', 'meta_description','category_id',
         'size_guide', 'main_image', 'color_id', 'fabric_option_id',
         'wash_care_id', 'feature_id', 'gender_id', 'branding_option_id',
         'pattern_id'

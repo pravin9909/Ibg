@@ -208,11 +208,156 @@
         <div class="vertical-overlay"></div>
         <div class="main-content">
             <div class="page-content">
-                <form action="{{ route('products.store') }}" method="POST">
-                    @csrf
-                    @include('products.form', ['product' => null])
-                    <button type="submit" class="btn btn-primary">Save</button>
-                </form>
+               <!-- resources/views/products/create.blade.php -->
+               <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h1>Create Product</h1>
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+                        <form action="{{ route('products.store') }}" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            <div class="form-group">
+                                <label for="category_id">Category</label>
+                                <select name="category_id" id="category_id" class="form-control">
+                                    <option value="">Select Category</option>
+                                    @foreach ($categories as $category)
+                                        <option value="{{ $category->id }}" {{ (old('category_id') == $category->id) ? 'selected' : '' }}>{{ $category->title }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="title">Title</label>
+                                <input type="text" class="form-control" id="title" name="title" value="{{ old('title') }}" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="subtitle">Subtitle</label>
+                                <input type="text" class="form-control" id="subtitle" name="subtitle" value="{{ old('subtitle') }}">
+                            </div>
+                            <div class="form-group">
+                                <label for="sku">SKU</label>
+                                <input type="text" class="form-control" id="sku" name="sku" value="{{ old('sku') }}" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="description">Description</label>
+                                <textarea class="form-control" id="description" name="description" rows="3">{{ old('description') }}</textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="specification">Specification</label>
+                                <textarea class="form-control" id="specification" name="specification" rows="3">{{ old('specification') }}</textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="video_link">Video Link</label>
+                                <input type="text" class="form-control" id="video_link" name="video_link" value="{{ old('video_link') }}">
+                            </div>
+                            <div class="form-group">
+                                <label for="slug">Slug</label>
+                                <input type="text" class="form-control" id="slug" name="slug" value="{{ old('slug') }}" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="meta_title">Meta Title</label>
+                                <input type="text" class="form-control" id="meta_title" name="meta_title" value="{{ old('meta_title') }}">
+                            </div>
+                            <div class="form-group">
+                                <label for="meta_description">Meta Description</label>
+                                <textarea class="form-control" id="meta_description" name="meta_description" rows="3">{{ old('meta_description') }}</textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="size_guide">Size Guide</label>
+                                <input type="text" class="form-control" id="size_guide" name="size_guide" value="{{ old('size_guide') }}">
+                            </div>
+                            <div class="form-group">
+                                <label for="main_image">Main Image</label>
+                                <input type="file" class="form-control-file                         id="main_image" name="main_image" required>
+                            </div>
+                            
+                            {{-- <div class="form-group">
+                                <label for="category_id">Category</label>
+                                <select name="category_id" id="category_id" class="form-control">
+                                    <option value="">Select Category</option>
+                                    @foreach ($categories as $category)
+                                        <option value="{{ $category->id }}" {{ (old('category_id') == $category->id) ? 'selected' : '' }}>{{ $category->title }}</option>
+                                    @endforeach
+                                </select>
+                            </div> --}}
+                            <div class="form-group">
+                                <label for="color_id">Color</label>
+                                <select name="color_id" id="color_id" class="form-control">
+                                    <option value="">Select Color</option>
+                                    @foreach ($colors as $color)
+                                        <option value="{{ $color->id }}" {{ (old('color_id') == $color->id) ? 'selected' : '' }}>{{ $color->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="fabric_option_id">Fabric Option</label>
+                                <select name="fabric_option_id" id="fabric_option_id" class="form-control">
+                                    <option value="">Select Fabric Option</option>
+                                    @foreach ($fabricOptions as $fabricOption)
+                                        <option value="{{ $fabricOption->id }}" {{ (old('fabric_option_id') == $fabricOption->id) ? 'selected' : '' }}>{{ $fabricOption->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="wash_care_id">Wash Care</label>
+                                <select name="wash_care_id" id="wash_care_id" class="form-control">
+                                    <option value="">Select Wash Care</option>
+                                    @foreach ($washCares as $washCare)
+                                        <option value="{{ $washCare->id }}" {{ (old('wash_care_id') == $washCare->id) ? 'selected' : '' }}>{{ $washCare->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="feature_id">Feature</label>
+                                <select name="feature_id" id="feature_id" class="form-control">
+                                    <option value="">Select Feature</option>
+                                    @foreach ($features as $feature)
+                                        <option value="{{ $feature->id }}" {{ (old('feature_id') == $feature->id) ? 'selected' : '' }}>{{ $feature->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="gender_id">Gender</label>
+                                <select name="gender_id" id="gender_id" class="form-control">
+                                    <option value="">Select Gender</option>
+                                    @foreach ($genders as $gender)
+                                        <option value="{{ $gender->id }}" {{ (old('gender_id') == $gender->id) ? 'selected' : '' }}>{{ $gender->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="branding_option_id">Branding Option</label>
+                                <select name="branding_option_id" id="branding_option_id" class="form-control">
+                                    <option value="">Select Branding Option</option>
+                                    @foreach ($brandingOptions as $brandingOption)
+                                        <option value="{{ $brandingOption->id }}" {{ (old('branding_option_id') == $brandingOption->id) ? 'selected' : '' }}>{{ $brandingOption->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="pattern_id">Pattern</label>
+                                <select name="pattern_id" id="pattern_id" class="form-control">
+                                    <option value="">Select Pattern</option>
+                                    @foreach ($patterns as $pattern)
+                                        <option value="{{ $pattern->id }}" {{ (old('pattern_id') == $pattern->id) ? 'selected' : '' }}>{{ $pattern->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+        
+                            <button type="submit" class="btn btn-primary">Create Product</button>
+                            <a href="{{ route('products.index') }}" class="btn btn-secondary">Cancel</a>
+                        </form>
+                    </div>
+                </div>
+            </div>        
+
             </div>
         </div>
     </div>

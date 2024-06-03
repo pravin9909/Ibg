@@ -16,9 +16,7 @@ use App\Http\Controllers\CategoryController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [CategoryController::class, 'showCategories'])->name('home');
 
 
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
@@ -48,3 +46,18 @@ Route::get('/products/{product}', [ProductController::class, 'show'])->middlewar
 Route::get('/products/{product}/edit', [ProductController::class, 'edit'])->middleware('custom.auth')->name('products.edit');
 Route::put('/products/{product}', [ProductController::class, 'update'])->middleware('custom.auth')->name('products.update');
 Route::delete('/products/{product}', [ProductController::class, 'destroy'])->middleware('custom.auth')->name('products.destroy');
+
+// Route::get('/categories', [CategoryController::class, 'showCategories'])->name('categories.show');
+Route::get('/products/category/{id}', [ProductController::class, 'getProductsByCategory'])->name('products.byCategory');
+Route::get('/products/search', [ProductController::class, 'search'])->name('products.search');
+
+
+// Route::get('/', [ProductController::class, 'index'])->name('home');
+Route::get('products/listing', [ProductController::class, 'index'])->name('products.listing');
+Route::resource('products', ProductController::class);
+Route::get('/category/{slug}', [CategoryController::class, 'show'])->name('category.show');
+
+// Product routes
+Route::get('/product/{id}', [ProductController::class, 'show'])->name('product.show');
+Route::get('/product/filter', [ProductController::class, 'filter'])->name('products.filter');
+
